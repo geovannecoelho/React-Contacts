@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-const apiUrl = "https://contacts-cative.herokuapp.com/login";
+const apiUrl = "https://contacts-cative.herokuapp.com";
 
 const authService = {
 
     async sendLogin(data){
-        let endpoint = apiUrl + "/auth/sign-in";
+        let endpoint = apiUrl + "/login";
         return axios.post(endpoint, data)
     },
 
