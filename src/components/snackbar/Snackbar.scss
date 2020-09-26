@@ -1,0 +1,45 @@
+.snackbar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 90;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.snackbar-hidden{
+    display: none;
+}
+
+.my-snackbar{
+    background-color: #ffffff;
+    width:500px;
+    padding: 15px;
+    border-radius: 4px;
+}
+
+.btn-login{
+  width: 150px;
+  height: 49px;
+  border: none;
+  outline: none;
+  border-radius: 49px;
+  cursor: pointer;
+  background-color: #FBEF6E;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 10px 0;
+  transition: .5s;
+}
+
+.btn-login:hover{
+  background-color: #9B30F9;
+  transition: 0.5s;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+

@@ -1,112 +1,107 @@
 import React from "react";
-import Logo from '../../assets/img/Logo_principal.png'; 
+import Logo from "../../assets/img/Logo_principal.png";
+import Snackbar from '../../components/snackbar/index';
+import authService from '../../services/auth.service';
 
 class LoginPage extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      userName: "",
+      password: "",
+      alertMessage: null,
+    };
+
+    this.Snackbar = React.createRef();
+  }
+
+  async sendLogin(event) {
+    event.preventDefault();
+
+    const data = {
+      nickName: this.state.userName,
+      password: this.state.password,
+    };
+
+    if (!data.nickName || data.nickName == "") {
+      this.setState({ alertMessage: "Insira seu usúario." });
+      this.Snackbar.current.toggleShow(true);
+      return;
+    }
+
+    if (!data.password || data.password == "") {
+      this.setState({ alertMessage: "Insira sua Senha." });
+      this.Snackbar.current.toggleShow(true);
+      return;
+    }
+
+    try {
+      let res = await authService.sendLogin(data);
+      authService.setLoggedUser(res.data.data);
+      this.props.onLogin();
+      this.props.history.replace("/");
+    } catch (error) {
+      console.log(error);
+      this.setState({ alertMessage: "E-mail ou senhas inválidos." });
+      this.Snackbar.current.toggleShow(true);
+    }
+  }
+
+  closeModal() {
+    this.setState({ alertMessage: null });
+    this.Snackbar.current.toggleShow(false);
+  }
+
   render() {
     return (
       <div className="container">
         <div className="forms-container">
           <div className="signin-signup">
-            <form action="#" className="sign-in-form">
-              <img
-                className="usuario"
-                src={Logo}
-                alt="Usuário"
-              />
+            <form onSubmit={e => this.sendLogin(e)} action="#" className="sign-in-form">
+              <img className="usuario" src={Logo} alt="Usuário" />
               <h2 className="title">Login</h2>
               <div className="input-field input-focus">
                 <i className="fas fa-user" />
-                <input type="text" placeholder="Email" />
+                <input
+                  type="text"
+                  id="userName"
+                  placeholder="Usuário"
+                  value={this.state.userName}
+                  onChange={e => this.setState({userName : e.target.value})} />
               </div>
               <div className="input-field">
                 <i className="fas fa-lock" />
-                <input type="password" placeholder="Senha" />
+                <input type="password"  id="password" placeholder="Senha" 
+                value={this.state.password}
+                onChange={e => this.setState({password : e.target.value})} />
               </div>
               <input
                 type="submit"
                 defaultValue="Entrar"
                 className="btn solid"
               />
-              <a href="recuperar-senha.html" className="recover">
-                Esqueceu a senha?
-              </a>
-              <p className="social-text">
-                Acesse sua conta através de suas redes sociais.
-              </p>
-              <div className="social-media">
-                <a href="#" className="social-icon facebook">
-                  <i className="fab fa-facebook-f" />
-                </a>
-                <a href="#" className="social-icon google">
-                  <i className="fab fa-google" />
-                </a>
-                <a href="#" className="social-icon linkedin">
-                  <i className="fab fa-linkedin-in" />
-                </a>
-              </div>
-            </form>
-            <form action="#" className="sign-up-form">
-              <img
-                className="usuario"
-                src="img/Logo_principal.png"
-                alt="Usuário"
-              />
-              <h2 className="title">Cadastre-se</h2>
-              <div className="input-field">
-                <i className="fas fa-user" />
-                <input type="text" placeholder="Nome" />
-              </div>
-              <div className="input-field">
-                <i className="fas fa-envelope" />
-                <input type="email" placeholder="Email" />
-              </div>
-              <div className="input-field">
-                <i className="fas fa-lock" />
-                <input type="password" placeholder="Senha" />
-              </div>
-              <input type="submit" className="btn" defaultValue="Cadastrar" />
-              <p className="social-text">
-                Ou se preferir, Cadastre-se com suas redes sociais.
-              </p>
-              <div className="social-media">
-                <a href="#" className="social-icon facebook">
-                  <i className="fab fa-facebook-f" />
-                </a>
-                <a href="#" className="social-icon google">
-                  <i className="fab fa-google" />
-                </a>
-                <a href="#" className="social-icon linkedin">
-                  <i className="fab fa-linkedin-in" />
-                </a>
-              </div>
             </form>
           </div>
         </div>
         <div className="panels-container">
           <div className="panel left-panel">
             <div className="content">
-              <h3>Novo por aqui?</h3>
-              <p>
-                Crie sua conta, é rápido e fácil, embarque nessa aventura! Sua
-                rotina de uma forma divertida.
-              </p>
-              <button className="btn transparent" id="sign-up-btn">
-                Cadastrar
-              </button>
+              <h3> React API de Contatos </h3>
+              <p>Abraão Azevedo - RM: 83983</p>
+              <p>Geovanne Amorim - RM: 82578</p>
+              <p>Iago Garcia - RM: 82448</p>
+              <p>Rodrigo Sussumu - RM: 83888</p>
             </div>
-            <img src="img/Logo_jo.png" className="image" alt />
-          </div>
-          <div className="panel right-panel">
-            <div className="content">
-              <h3>Login</h3>
-              <p>Caso já possua conta, fazer login em vez disso.</p>
-              <button className="btn transparent" id="sign-in-btn">
-                Login
-              </button>
-            </div>
-            <img src="img/banner-2.svg" className="image" alt />
           </div>
         </div>
+        <Snackbar 
+          ref={this.Snackbar}
+          title="Tente novamente" 
+          onCancel={() => this.closeModal()}
+          onConfirm={() => this.closeModal()}>
+          {this.state.alertMessage}
+        </Snackbar>
       </div>
     );
   }
