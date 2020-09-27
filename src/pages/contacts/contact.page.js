@@ -59,20 +59,21 @@ class ContactsPage extends React.Component {
         <div className="contacts-list">
           <h1>Lista de contatos:</h1>
           <ul>
-            {this.state.contacts.map((item) => (
-              <div
-                onClick={() => {
-                  this.onContactClick(item.id);
-                }}
-                className="contacts"
-              >
-                <img src={item.avatar} alt />
-                <div className="contacts__info">
-                  <h1>{item.name}</h1>
-                  <p>{item.cell}</p>
+            {this.state.contacts.map((item, index) => (
+                <div
+                  key={index}
+                  onClick={() => {
+                    this.onContactClick(item.id);
+                  }}
+                  className="contacts"
+                >
+                  <img src={item.avatar} alt="Avatar" />
+                  <div className="contacts__info">
+                    <h1>{item.name}</h1>
+                    <p>{item.cell}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </ul>
         </div>
       </>

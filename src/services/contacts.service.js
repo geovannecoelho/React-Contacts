@@ -4,20 +4,23 @@ import authService from "./auth.service";
 const apiUrl = "https://contacts-cative.herokuapp.com/api";
 
 const contactsService = {
-  headers: {
-    headers: {
-      authorization: "Bearer " + authService.getLoggedUser()?.token,
-    },
-  },
   async list() {
     const enpoint = apiUrl + "/contacts";
  
-    return axios.get(enpoint, this.headers);
+    return axios.get(enpoint, {
+      headers: {
+        authorization: "Bearer " + authService.getLoggedUser()?.token,
+      },
+    });
   },
 
   async getOne(contactId) {
     const enpoint = apiUrl + "/contacts/" + contactId;
-    return axios.get(enpoint, this.headers);
+    return axios.get(enpoint, {
+      headers: {
+        authorization: "Bearer " + authService.getLoggedUser()?.token,
+      },
+    });
   },
 
   async create(data) {

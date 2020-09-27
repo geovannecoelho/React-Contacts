@@ -1,16 +1,16 @@
 import React from "react";
 import Logo from "../../assets/img/Logo_principal.png";
-import Snackbar from '../../components/snackbar/index';
-import authService from '../../services/auth.service';
-
+import Snackbar from "../../components/snackbar/index";
+import authService from "../../services/auth.service";
+import { Redirect } from "react-router-dom";
 class LoginPage extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
       userName: "",
       password: "",
       alertMessage: null,
+      redirectTo: null,
     };
 
     this.Snackbar = React.createRef();
@@ -38,15 +38,19 @@ class LoginPage extends React.Component {
 
     try {
       let res = await authService.sendLogin(data);
-      authService.setLoggedUser(res.data.data);
       
       let isOk = res?.data?.status === "success";
-
+      
       if (isOk) {
-        authService.setLoggedUser(res.data);
-        window.location.href = "/contacts";
+        console.log("setando", res.data);
+          authService.setLoggedUser(res.data);
+          this.setState({
+            redirectTo: "/contacts",
+          });
       } else {
-        this.setState({ alertMessage: "Ocorreu algum erro. Tente novamente mais tarde." });
+        this.setState({
+          alertMessage: "Ocorreu algum erro. Tente novamente mais tarde.",
+        });
         this.Snackbar.current.toggleShow(true);
       }
     } catch (error) {
@@ -62,11 +66,19 @@ class LoginPage extends React.Component {
   }
 
   render() {
+    if (this.state.redirectTo) {
+      return <Redirect to={this.state.redirectTo} />;
+    }
+
     return (
       <div className="container">
         <div className="forms-container">
           <div className="signin-signup">
-            <form onSubmit={e => this.sendLogin(e)} action="#" className="sign-in-form">
+            <form
+              onSubmit={(e) => this.sendLogin(e)}
+              action="#"
+              className="sign-in-form"
+            >
               <img className="usuario" src={Logo} alt="Usuário" />
               <h2 className="title">Login</h2>
               <div className="input-field input-focus">
@@ -76,13 +88,18 @@ class LoginPage extends React.Component {
                   id="userName"
                   placeholder="Usuário"
                   value={this.state.userName}
-                  onChange={e => this.setState({userName : e.target.value})} />
+                  onChange={(e) => this.setState({ userName: e.target.value })}
+                />
               </div>
               <div className="input-field">
                 <i className="fas fa-lock" />
-                <input type="password"  id="password" placeholder="Senha" 
-                value={this.state.password}
-                onChange={e => this.setState({password : e.target.value})} />
+                <input
+                  type="password"
+                  id="password"
+                  placeholder="Senha"
+                  value={this.state.password}
+                  onChange={(e) => this.setState({ password: e.target.value })}
+                />
               </div>
               <input
                 type="submit"
@@ -103,11 +120,12 @@ class LoginPage extends React.Component {
             </div>
           </div>
         </div>
-        <Snackbar 
+        <Snackbar
           ref={this.Snackbar}
-          title="Tente novamente" 
+          title="Tente novamente"
           onCancel={() => this.closeModal()}
-          onConfirm={() => this.closeModal()}>
+          onConfirm={() => this.closeModal()}
+        >
           {this.state.alertMessage}
         </Snackbar>
       </div>
