@@ -6,12 +6,11 @@
 .contact-detail{
   max-width: 40em;
   max-height: 25em;
-  background-color: #ddd;
   margin: 0 auto;
   box-shadow: 4px 4px 4px rgba(0,0,0,0.1);
   margin-top: 80px;
   border-radius: 2%;
-  border: 2px solid #000;
+  border: 2px solid #ddd;
   
 }
 
@@ -27,16 +26,20 @@
 .contact-detail h1{
   text-align: center;
   font-weight: bold;
+  margin-bottom: 15px;
 }
 
 .contact__detail__info{
   max-width: 30em;
   max-height: 25em;
   margin: 0 auto;
-  border-radius: 2%;
-  border: 2px solid #000;
 }
 
 .detail__info{
-  display: flex-d;
+  display: flex;
+  align-items: center;
+}
+
+.detail__info p{
+  margin-left: 20px;
 }

@@ -54,7 +54,7 @@ class ContactDetailPage extends React.Component {
         <Navbar />
 
         <div className="back-area">
-          <a href="#" onClick={this.onBackRequest}>
+          <a href="#" className="navbar_link" onClick={this.onBackRequest}>
             {"<"} voltar
           </a>
         </div>
@@ -66,13 +66,18 @@ class ContactDetailPage extends React.Component {
             <div className="detail__info">
               <h2>Telefone</h2>
               <p>{this.state.contactData.phone}</p>
+            </div>
+            <div className="detail__info">
               <h2>Celular</h2>
               <p> {this.state.contactData.cell} </p>
+            </div>
+            <div className="detail__info">
               <h2>Email</h2>
               <p>{this.state.contactData.email}</p>
             </div>
           </div>
         </div>
+        
       </>
     );
   }

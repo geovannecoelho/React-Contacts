@@ -21,8 +21,9 @@ class Navbar extends Component {
   render() {
     return (
       <div className="navbar">
-        <Link to="/" onClick={this.onLogoutRequest}>
-          sair
+        <h1> Contatos </h1>
+        <Link className="navbar_link" to="/" onClick={this.onLogoutRequest}>
+          Sair
         </Link>
       </div>
     );

@@ -8,11 +8,9 @@
 .contacts {
   max-width: 40em;
   max-height: 25em;
-  background-color: #ddd;
   margin: 0 auto;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 4px 1px rgba(0.1, 0.2, 0.2, 0.2);
   border-radius: 2%;
-  border: 2px solid #000;
   display: flex;
   align-items: center;
   margin-bottom: 8px;
@@ -22,7 +20,7 @@
 .contacts img {
   width: 100px;
   height: 100px;
-  background: salmon;
   border-radius: 50%;
   margin-right: 5%;
+  margin-left: 5%;
 }

@@ -57,7 +57,7 @@ class ContactsPage extends React.Component {
         <Navbar />
 
         <div className="contacts-list">
-          <h1>Lista de contatos:</h1>
+          <h1>Lista de contatos</h1>
           <ul>
             {this.state.contacts.map((item, index) => (
                 <div
