@@ -2,6 +2,7 @@ import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import authService from "../../services/auth.service";
 import contactsService from "../../services/contacts.service";
+import './contacts.style.scss';
 
 class ContactsPage extends React.Component {
   constructor(props) {
@@ -38,10 +39,12 @@ class ContactsPage extends React.Component {
     }
 
     return (
-      <div className="">
-        <h1>
-          Testeeee
-        </h1>
+      <div className="contacts">
+        <img src alt />
+        <div className="contacts__info">
+          <h1>Nome do contato</h1>
+          <p>++ 55 11 99736-5555</p>
+        </div>
       </div>
     )
   }

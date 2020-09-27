@@ -1,0 +1,37 @@
+.contact-detail{
+  max-width: 40em;
+  max-height: 25em;
+  background-color: #ddd;
+  margin: 0 auto;
+  box-shadow: 4px 4px 4px rgba(0,0,0,0.1);
+  margin-top: 10%;
+  border-radius: 2%;
+  border: 2px solid #000;
+  
+}
+
+.contact-detail img {
+  width: 100px;
+  height: 100px;
+  background: salmon;
+  border-radius: 50%;
+  margin-left: 40%;
+  margin-top: 5%;
+}
+
+.contact-detail h1{
+  text-align: center;
+  font-weight: bold;
+}
+
+.contact__detail__info{
+  max-width: 30em;
+  max-height: 25em;
+  margin: 0 auto;
+  border-radius: 2%;
+  border: 2px solid #000;
+}
+
+.detail__info{
+  display: flex-d;
+}
