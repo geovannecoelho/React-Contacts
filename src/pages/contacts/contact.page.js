@@ -1,8 +1,9 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
+import Navbar from "../../components/navbar";
 import authService from "../../services/auth.service";
 import contactsService from "../../services/contacts.service";
-import './contacts.style.scss';
+import "./contacts.style.scss";
 
 class ContactsPage extends React.Component {
   constructor(props) {
@@ -12,6 +13,9 @@ class ContactsPage extends React.Component {
       contacts: [],
       redirectTo: null,
     };
+
+    this.onLogoutRequest = this.onLogoutRequest.bind(this);
+    this.onContactClick = this.onContactClick.bind(this);
   }
 
   componentDidMount() {
@@ -33,20 +37,46 @@ class ContactsPage extends React.Component {
     }
   }
 
+  onLogoutRequest() {
+    authService.clearLoggedUser();
+  }
+
+  onContactClick(contactId) {
+    this.setState({
+      redirectTo: "/contact-detail/" + contactId,
+    });
+  }
+
   render() {
     if (this.state.redirectTo) {
       return <Redirect to={this.state.redirectTo} />;
     }
 
     return (
-      <div className="contacts">
-        <img src alt />
-        <div className="contacts__info">
-          <h1>Nome do contato</h1>
-          <p>++ 55 11 99736-5555</p>
+      <>
+        <Navbar />
+
+        <div className="">
+          <h1>lista de contatos:</h1>
+          <ul>
+            {this.state.contacts.map((item) => (
+              <div
+                onClick={() => {
+                  this.onContactClick(item.id);
+                }}
+                className="contacts"
+              >
+                <img src alt />
+                <div className="contacts__info">
+                  <h1>{item.name}</h1>
+                  <p>{item.cell}</p>
+                </div>
+              </div>
+            ))}
+          </ul>
         </div>
-      </div>
-    )
+      </>
+    );
   }
 }
 

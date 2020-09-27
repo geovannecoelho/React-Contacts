@@ -20,11 +20,11 @@ class LoginPage extends React.Component {
     event.preventDefault();
 
     const data = {
-      nickName: this.state.userName,
+      email: this.state.userName,
       password: this.state.password,
     };
 
-    if (!data.nickName || data.nickName == "") {
+    if (!data.email || data.email == "") {
       this.setState({ alertMessage: "Insira seu usúario." });
       this.Snackbar.current.toggleShow(true);
       return;
@@ -39,8 +39,16 @@ class LoginPage extends React.Component {
     try {
       let res = await authService.sendLogin(data);
       authService.setLoggedUser(res.data.data);
-      this.props.onLogin();
-      this.props.history.replace("/");
+      
+      let isOk = res?.data?.status === "success";
+
+      if (isOk) {
+        authService.setLoggedUser(res.data);
+        window.location.href = "/contacts";
+      } else {
+        this.setState({ alertMessage: "Ocorreu algum erro. Tente novamente mais tarde." });
+        this.Snackbar.current.toggleShow(true);
+      }
     } catch (error) {
       console.log(error);
       this.setState({ alertMessage: "E-mail ou senhas inválidos." });
