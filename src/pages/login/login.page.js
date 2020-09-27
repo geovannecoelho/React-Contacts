@@ -42,7 +42,6 @@ class LoginPage extends React.Component {
       let isOk = res?.data?.status === "success";
       
       if (isOk) {
-        console.log("setando", res.data);
           authService.setLoggedUser(res.data);
           this.setState({
             redirectTo: "/contacts",
