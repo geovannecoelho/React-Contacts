@@ -1,13 +1,22 @@
-.contacts{
+.contacts-list {
+  text-align: center;
+  h1 {
+    margin-bottom: 24px;
+  }
+}
+
+.contacts {
   max-width: 40em;
   max-height: 25em;
   background-color: #ddd;
   margin: 0 auto;
-  box-shadow: 4px 4px 4px rgba(0,0,0,0.1);
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.1);
   border-radius: 2%;
   border: 2px solid #000;
   display: flex;
   align-items: center;
+  margin-bottom: 8px;
+  cursor: pointer;
 }
 
 .contacts img {

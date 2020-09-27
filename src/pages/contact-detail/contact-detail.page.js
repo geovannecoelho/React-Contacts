@@ -53,9 +53,11 @@ class ContactDetailPage extends React.Component {
       <>
         <Navbar />
 
-        <a href="#" onClick={this.onBackRequest}>
-          voltar
-        </a>
+        <div className="back-area">
+          <a href="#" onClick={this.onBackRequest}>
+            {"<"} voltar
+          </a>
+        </div>
         <div className="contact-detail">
           <img src={this.state.contactData.avatar} alt="Avatar" />
 

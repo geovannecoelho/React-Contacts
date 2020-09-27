@@ -56,8 +56,8 @@ class ContactsPage extends React.Component {
       <>
         <Navbar />
 
-        <div className="">
-          <h1>lista de contatos:</h1>
+        <div className="contacts-list">
+          <h1>Lista de contatos:</h1>
           <ul>
             {this.state.contacts.map((item) => (
               <div
@@ -66,7 +66,7 @@ class ContactsPage extends React.Component {
                 }}
                 className="contacts"
               >
-                <img src alt />
+                <img src={item.avatar} alt />
                 <div className="contacts__info">
                   <h1>{item.name}</h1>
                   <p>{item.cell}</p>

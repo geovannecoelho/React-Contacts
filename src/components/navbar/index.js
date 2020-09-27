@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import authService from "../../services/auth.service";
 import { Link } from "react-router-dom";
-
+import './navbar.scss'
 class Navbar extends Component {
   constructor(props) {
     super(props);
@@ -20,7 +20,7 @@ class Navbar extends Component {
 
   render() {
     return (
-      <div>
+      <div className="navbar">
         <Link to="/" onClick={this.onLogoutRequest}>
           sair
         </Link>
